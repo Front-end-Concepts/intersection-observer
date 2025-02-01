@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Intersection Observer</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.26.0/themes/prism-tomorrow.css"
+      rel="stylesheet"
+    />
+    <!-- Prism.js JS -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.26.0/prism.js"></script>
     <script defer src="app.js"></script>
   </head>
   <body>
@@ -23,6 +29,37 @@
         properties like threshold, rootMargin and unobserve. We can also create
         infinite scrolls using this.
       </p>
+    </section>
+
+    <section class="code-editor-section hidden">
+      <h2>Using in Code</h2>
+      <p>
+        We define the sections as hidden by setting their initial opacity to 0.
+        We also define a class called <code>show</code>, where the opacity is
+        set to 1. The <code>IntersectionObserver</code> API is used to observe
+        elements as they enter or leave the viewport. When an element is in the
+        viewport, the Intersection Observer toggles the <code>show</code> class,
+        making the component visible by changing its opacity to 1.
+      </p>
+      <div class="language-javascript">
+        <pre><code>
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Toggle the 'show' class based on whether the element is in the viewport
+          entry.target.classList.toggle("show", entry.isIntersecting);
+        });
+      },
+      { threshold: 0.5 } // Optional: Adjust when the element is considered visble (50% of the element)
+    );
+    
+    // Select all elements with the 'hidden' class
+    const hiddenElements = document.querySelectorAll(".hidden");
+    
+    // Start observing each hidden element
+    hiddenElements.forEach((el) => observer.observe(el));
+        </code></pre>
+      </div>
     </section>
 
     <section class="hidden">
